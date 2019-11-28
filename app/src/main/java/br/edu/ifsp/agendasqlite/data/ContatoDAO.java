@@ -10,6 +10,9 @@ import java.util.List;
 
 import br.edu.ifsp.agendasqlite.model.Contato;
 
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
+
 public class ContatoDAO {
 
     SQLiteDatabase database;
@@ -43,6 +46,11 @@ public class ContatoDAO {
            c.setNome(cursor.getString(1));
            c.setFone(cursor.getString(2));
            c.setEmail(cursor.getString(3));
+           if (cursor.getInt(4) == 1){
+               c.setFavorito(true);
+           }else{
+              c.setFavorito(false);
+           }
 
            contatos.add(c);
         }
@@ -63,6 +71,7 @@ public class ContatoDAO {
         values.put(SQLiteHelper.KEY_NOME, c.getNome());
         values.put(SQLiteHelper.KEY_FONE, c.getFone());
         values.put(SQLiteHelper.KEY_EMAIL, c.getEmail());
+        values.put(SQLiteHelper.KEY_FAVORITO, 0);
 
         long id = database.insert(SQLiteHelper.TABLE_NAME, null, values);
 
@@ -79,6 +88,7 @@ public class ContatoDAO {
         values.put(SQLiteHelper.KEY_NOME, c.getNome());
         values.put(SQLiteHelper.KEY_FONE, c.getFone());
         values.put(SQLiteHelper.KEY_EMAIL, c.getEmail());
+        values.put(SQLiteHelper.KEY_FAVORITO, (c.getFavorito()) ? 1 : 0); // Versão 2
 
         database.update(SQLiteHelper.TABLE_NAME, values,
                      SQLiteHelper.KEY_ID +"=" +c.getId(),null);

@@ -4,6 +4,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
@@ -18,6 +19,8 @@ import java.util.List;
 
 import br.edu.ifsp.agendasqlite.R;
 import br.edu.ifsp.agendasqlite.model.Contato;
+
+import static java.lang.Boolean.FALSE;
 
 public class ContatoAdapter
         extends RecyclerView.Adapter<ContatoAdapter.ContatoViewHolder>
@@ -91,7 +94,16 @@ public class ContatoAdapter
 
     @Override
     public void onBindViewHolder(@NonNull ContatoViewHolder holder, int position) {
-            holder.nome.setText(contactListFiltered.get(position).getNome());
+           holder.nome.setText(contactListFiltered.get(position).getNome());
+
+         //Contato contato = contactListFiltered.get(position);
+        //holder.nome.setText(contato.getNome());
+
+            if (contactListFiltered.get(position).getFavorito()) {
+               holder.favorito.setBackgroundResource(android.R.drawable.btn_star_big_on);
+            }else{
+              holder.favorito.setBackgroundResource(android.R.drawable.btn_star_big_off);
+            }
     }
 
     @Override
@@ -138,10 +150,20 @@ public class ContatoAdapter
             implements View.OnClickListener
     {
         final TextView nome;
+        final Button favorito;
 
         public ContatoViewHolder(@NonNull View itemView) {
             super(itemView);
-            nome = (TextView) itemView.findViewById(R.id.nome);
+            nome = itemView.findViewById(R.id.nome);
+            favorito = itemView.findViewById(R.id.btnFavorito);
+            favorito.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (clickListener != null)
+                        clickListener.onClickFavorite(getAdapterPosition()); // Versão 2
+                }
+            });
+
             itemView.setOnClickListener(this);
         }
 
@@ -156,6 +178,7 @@ public class ContatoAdapter
     public  interface ItemClickListener
     {
         void onItemClick(int position);
+        void onClickFavorite(int position); // Versão 2
     }
 
 

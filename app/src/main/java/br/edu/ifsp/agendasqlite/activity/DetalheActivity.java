@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -36,9 +37,6 @@ public class DetalheActivity extends AppCompatActivity {
             email.setText(c.getEmail());
 
         }
-
-
-
     }
 
 

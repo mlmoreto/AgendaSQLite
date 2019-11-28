@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        Button botaoFavorito = findViewById(R.id.btnFavorito);
         setSupportActionBar(toolbar);
 
         dao=new ContatoDAO(this);
@@ -55,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layout);
 
         contatos = dao.listaContatos();
+
+
 
         adapter = new ContatoAdapter(contatos);
 
@@ -68,7 +72,14 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(getApplicationContext(), DetalheActivity.class);
                 i.putExtra("contato",c);
                 startActivityForResult(i,2);
+            }
 
+            @Override
+            public void onClickFavorite(int position) {
+                final Contato c = adapter.getContactListFiltered().get(position);
+                c.setFavorito(!c.getFavorito());
+                dao.alterarContato(c);
+                adapter.atualizaContatoAdapter(c);
             }
         });
 
@@ -176,4 +187,6 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

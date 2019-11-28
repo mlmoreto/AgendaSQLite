@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -41,8 +42,9 @@ public class CadastroActivity extends AppCompatActivity {
             String nome = ((EditText) findViewById(R.id.editTextNome)).getText().toString();
             String fone = ((EditText) findViewById(R.id.editTextFone)).getText().toString();
             String email = ((EditText) findViewById(R.id.editTextEmail)).getText().toString();
+            Boolean favorito = false;
 
-            Contato c = new Contato(nome,fone,email);
+            Contato c = new Contato(nome,fone,email,favorito);
 
             int idContato = (int) dao.incluirContato(c);
             c.setId(idContato);
@@ -52,8 +54,6 @@ public class CadastroActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Contato inserido",Toast.LENGTH_LONG).show();
 
             finish();
-
-
         }
 
         return super.onOptionsItemSelected(item);
