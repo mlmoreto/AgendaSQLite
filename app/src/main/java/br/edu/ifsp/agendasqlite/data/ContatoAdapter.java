@@ -94,16 +94,13 @@ public class ContatoAdapter
 
     @Override
     public void onBindViewHolder(@NonNull ContatoViewHolder holder, int position) {
-           holder.nome.setText(contactListFiltered.get(position).getNome());
+         holder.nome.setText(contactListFiltered.get(position).getNome());
 
-         //Contato contato = contactListFiltered.get(position);
-        //holder.nome.setText(contato.getNome());
-
-            if (contactListFiltered.get(position).getFavorito()) {
-               holder.favorito.setBackgroundResource(android.R.drawable.btn_star_big_on);
-            }else{
-              holder.favorito.setBackgroundResource(android.R.drawable.btn_star_big_off);
-            }
+         if (contactListFiltered.get(position).getFavorito()) {
+             holder.favorito.setBackgroundResource(android.R.drawable.btn_star_big_on);
+         }else{
+             holder.favorito.setBackgroundResource(android.R.drawable.btn_star_big_off);
+         }
     }
 
     @Override
