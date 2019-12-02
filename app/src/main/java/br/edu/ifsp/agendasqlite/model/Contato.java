@@ -10,16 +10,18 @@ public class Contato implements Serializable {
     private String email;
     private Boolean favorito; // true - Favorito  false - Não Favorito
     private String fone2;
+    private String diaMesAniver; // DD/MM
 
     public Contato() {
     }
 
-    public Contato(String nome, String fone, String email, Boolean favorito, String fone2) {
+    public Contato(String nome, String fone, String email, Boolean favorito, String fone2, String diaMesAniver) {
         this.nome = nome;
         this.fone = fone;
         this.email = email;
         this.favorito = favorito;
         this.fone2 = fone2;
+        this.diaMesAniver = diaMesAniver;
     }
 
 
@@ -79,5 +81,13 @@ public class Contato implements Serializable {
 
     public void setFone2(String fone2) {
         this.fone2 = fone2;
+    }
+
+    public String getDiaMesAniver() {
+        return diaMesAniver;
+    }
+
+    public void setDiaMesAniver(String diaMesAniver) {
+        this.diaMesAniver = diaMesAniver;
     }
 }

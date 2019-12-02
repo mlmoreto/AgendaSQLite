@@ -39,6 +39,9 @@ public class DetalheActivity extends AppCompatActivity {
             EditText fone2 = findViewById(R.id.editTextFone2);
             fone2.setText(c.getFone2());
 
+            EditText diaMesAniver = findViewById(R.id.editTextDataAniver);
+            diaMesAniver.setText(c.getDiaMesAniver());
+
         }
     }
 
@@ -65,11 +68,13 @@ public class DetalheActivity extends AppCompatActivity {
             String fone = ((EditText) findViewById(R.id.editTextFone)).getText().toString();
             String email = ((EditText) findViewById(R.id.editTextEmail)).getText().toString();
             String fone2 = ((EditText) findViewById(R.id.editTextFone2)).getText().toString();
+            String diaMesAniver = ((EditText) findViewById(R.id.editTextDataAniver)).getText().toString();
 
             c.setNome(nome);
             c.setFone(fone);
             c.setEmail(email);
             c.setFone2(fone2);
+            c.setDiaMesAniver(diaMesAniver);
 
             dao.alterarContato(c);
             Log.d("ID: ", Integer.toString(c.getId()));
@@ -95,8 +100,4 @@ public class DetalheActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
 }
